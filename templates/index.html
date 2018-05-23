@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>醫生專用視察傷口網站</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var dialog, form,
+                name = $("#name"),
+                password = $("#password"),
+                allFields = $([]).add(name).add(password);
+
+
+            dialog = $("#dialog-form").dialog({
+                autoOpen: true,
+                height: 200,
+                width: 350,
+                modal: true,
+            });
+
+        });
+
+        function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+        }
+
+    </script>
+</head>
+<body>
+
+{% if not user.is_authenticated %}
+    <div id="dialog-form" title="請登入">
+        <form action="" method="post">
+            {% csrf_token %}
+            <br/>
+            <label for="user">User　</label>
+            <input type="text" name="username" id="username"><br/><br/>
+            <label for="password">Password　</label>
+            <input type="password" name="password" id="password"><br/><br/>
+            <input type="submit" tabindex="-1" value="登入">
+        </form>
+    </div>
+{% endif %}
+
+
+<div class="topnav">
+    <a href="{% url 'home' %}" target="content">Home</a>
+    <a href="{% url 'photos' %}" target="content">Watching Photo</a>
+    <!--<a href="{% url 'home' %}" target="content">About</a>-->
+    {% if user.is_authenticated %}
+    <a style="float:right" href="{% url 'user_logout' %}" target="content">Logout</a>
+    {% else %}
+    <a style="float:right" href="{% url 'index' %}">Login</a>
+    {% endif %}
+</div>
+
+<div class="wrap-1">
+    <iframe name="content" src="{% url 'home' %}" width="100%" frameborder="0" scrolling="no"
+            onload="resizeIframe(this);"></iframe>
+</div>
+</body>
+</html>

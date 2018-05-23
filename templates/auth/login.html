@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        {% if not user.is_authenticated %}
+        <form action="" method="post">
+			{% csrf_token %}
+            <label for="username">用戶名稱:</label>
+            <input type="text" name="username" value="" id="username"> <br /><br />
+            <label for="password">用戶密碼:</label>
+            <input type="password" name="password" value="" id="password"> <br />
+            <input type="submit" value="登入" />
+        </form>
+        {% else %}
+            <h1> Fuck your programming!</h1>
+        {% endif %}
+{% endblock content %}

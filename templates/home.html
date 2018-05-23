@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.ico">
+    <title>醫生專用視察傷口網站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+        }
+
+        div.content {
+            margin-left: 0;
+            padding: 3px 16px;
+            height: 1000px;
+        }
+
+        div.chart_button {
+            padding-bottom: 20px;
+        }
+
+        div.chart_diplay {
+            font-size: 20px;
+            border: 2px solid rgba(43, 43, 43, 0.99);
+            width: 700px;
+        }
+
+        input[type=button] {
+            background-color: Gray;
+            border: none;
+            color: white;
+            padding: 6px 10px;
+            width: 15em;
+            height: 3em;
+            text-decoration: none;
+            font-size: 15px;
+            margin: 3px 1px;
+
+            cursor: pointer;
+        }
+
+
+    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        function SelectorAll() {
+            var tagname = "input";
+            var seltag = document.querySelectorAll(tagname);
+            // alert( "共有 " + seltag.length + "個" + tagname + "標籤");
+            alert("病人使用數統計");
+        }
+
+        function SelectorFirst() {
+            var classname = ".format";
+            var selclass = document.querySelector(classname);
+            alert("病人服藥率統計");
+        }
+
+        window.addEventListener("load", function () {
+            showplot();
+        })
+
+        function showplot() {
+            var ExpP = document.getElementById("using_rate");
+
+        }
+
+    </script>
+</head>
+<body>
+{% csrf_token %}
+<div class="content">
+    <div class="introduce">
+        <h2>歡迎使用線上傷口關護網站</h2>
+        <p>可以檢視病人傷口照片、是否按時服藥比例</p>
+        <hr>
+    </div>
+
+    <div class="chart_button">
+        <input type="button" onclick="SelectorAll()" value="病人使用數統計">
+        <input type="button" onclick="SelectorFirst()" value="病人服藥率統計"><br>
+    </div>
+
+    <div class="chart_diplay">
+        <p>　病人使用數統計</p><br>
+        <div id="using_rate" style="width:700px;height:200px;"></div>
+    </div>
+
+</div>
+
+</body>
+</html>
